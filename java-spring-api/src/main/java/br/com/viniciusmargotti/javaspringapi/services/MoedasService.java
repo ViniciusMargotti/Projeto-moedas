@@ -47,7 +47,7 @@ public class MoedasService {
         Moedas moedas = new Moedas(coin.get("name").toString(),
                 coin.get("description").toString(),
                 coin.get("color").toString(),
-                coin.get("price").toString());
+                Double.parseDouble(coin.get("price").toString()));
 
         moedasRepository.save(moedas);
     }

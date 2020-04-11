@@ -25,7 +25,10 @@ public class Moedas implements Serializable{
 	private String color;
 
 	@Column(name = "price")
-	private String price;
+	private Double price;
+
+	@Column(name = "data")
+	private LocalDateTime data;
 
 	public long getId() {
 		return id;
@@ -59,18 +62,27 @@ public class Moedas implements Serializable{
 		this.color = color;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Moedas(String name, String description, String color, String price) {
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
+
+	public Moedas(String name, String description, String color, Double price) {
 		this.name = name;
 		this.description = description;
 		this.color = color;
 		this.price = price;
+		this.data = LocalDateTime.now();
 	}
 }
