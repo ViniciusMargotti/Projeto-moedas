@@ -20,15 +20,20 @@ public class MoedasResource {
 	
 	@Description(value="Retorna uma lista de moedas")
 	@GetMapping("/moedas")
-	public List<Moedas> listaCidades(){
+	public List<Moedas> listaMoedas(){
 		return moedasRepository.findAll();
 	}
 
-	
+	@Description(value="Retorna uma lista de moedas pelo identificador")
+	@GetMapping("/moedas/{name}")
+	public List<Moedas> listaMoedas( @PathVariable("name") String name){
+		return moedasRepository.findByName(name);
+	}
+
 	@Description(value="Salva uma moeda")
 	@PostMapping("/moeda")
-	public Moedas salvaCidade(@RequestBody @Valid Moedas cidade) {
-		return moedasRepository.save(cidade);
+	public Moedas salvaMoeda(@RequestBody @Valid Moedas moeda) {
+		return moedasRepository.save(moeda);
 	}
 
 }

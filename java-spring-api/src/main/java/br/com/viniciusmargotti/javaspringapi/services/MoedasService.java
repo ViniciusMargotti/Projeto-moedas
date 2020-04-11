@@ -4,7 +4,6 @@ import br.com.viniciusmargotti.javaspringapi.models.Moedas;
 import br.com.viniciusmargotti.javaspringapi.repositories.MoedasRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.Registration;
-import javax.xml.ws.Response;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -50,5 +46,18 @@ public class MoedasService {
                 Double.parseDouble(coin.get("price").toString()));
 
         moedasRepository.save(moedas);
+
+        String json2 = restTemplate.exchange("https://coinranking1.p.rapidapi.com/coin/2",
+                HttpMethod.GET,entity,String.class).getBody();
+
+        HashMap o2 = objectMapper.readValue(json2,HashMap.class);
+        HashMap moeda2 = (HashMap) o2.get("data");
+        HashMap coin2 = (HashMap) moeda2.get("coin");
+        Moedas moedas2 = new Moedas(coin2.get("name").toString(),
+                coin2.get("description").toString(),
+                coin2.get("color").toString(),
+                Double.parseDouble(coin2.get("price").toString()));
+
+        moedasRepository.save(moedas2);
     }
 }

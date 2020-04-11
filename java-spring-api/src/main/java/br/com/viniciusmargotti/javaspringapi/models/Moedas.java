@@ -85,4 +85,7 @@ public class Moedas implements Serializable{
 		this.price = price;
 		this.data = LocalDateTime.now();
 	}
+	public Moedas(){
+
+	}
 }
