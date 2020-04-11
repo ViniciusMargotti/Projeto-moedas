@@ -1,2 +1,2 @@
 # Projeto-moedas
- Projeto que mostra dados das moedas ao redor do mundo
+ Projeto que mostra dados de Criptomoedas
